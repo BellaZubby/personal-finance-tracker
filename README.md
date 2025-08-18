@@ -5,7 +5,7 @@ Akulyst is a full-stack MERN application designed to help users take control of 
 
 ---
 
-## Key Features
+## Key Features of Akulyst
 - User Authentication: Secure login and personalized data access.
 - Monthly Budget Setup: Define spending limits across categories like Food, Transport, Entertainment, etc.
 - Daily Expense Logging: Track expenses with category, amount, date, and notes.
