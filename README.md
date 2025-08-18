@@ -1,7 +1,7 @@
-# Personal Finance Tracker
+# Akulyst: Personal Finance Tracker
 
 ## Overview
-Personal Finance Tracker is a full-stack MERN application designed to help users take control of their finances through intuitive budgeting tools, real-time expense tracking, and AI-powered insights. It empowers users to plan monthly budgets, log daily expenses, set savings goals, and receive smart suggestions based on their spending behavior.
+Akulyst is a full-stack MERN application designed to help users take control of their finances through intuitive budgeting tools, real-time expense tracking, and AI-powered insights. It empowers users to plan monthly budgets, log daily expenses, set savings goals, and receive smart suggestions based on their spending behavior.
 
 ---
 
