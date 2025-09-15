@@ -1,16 +1,12 @@
-import { sendEmail } from './sendEmail';
-import { BASE_URL } from '../config/dotenv';
-
+import { sendEmail } from "./sendEmail";
+import { BASE_URL } from "../config/dotenv";
 
 export const sendOTPEmail = async (email: string, otp: string) => {
   const html = `<p>Your OTP is <strong>${otp}</strong>. It expires in 10 minutes.</p>`;
-  await sendEmail(email, 'Your OTP Code', html);
+  await sendEmail(email, "Your OTP Code", html);
 };
 
-export const sendPasswordResetEmail = async (
-  email: string,
-  code: string
-) => {
+export const sendPasswordResetEmail = async (email: string, code: string) => {
   const resetLink = `${BASE_URL}/reset-password?code=${code}`;
   const html = `
     <p>Click the button below to reset your password:</p>
@@ -24,5 +20,5 @@ export const sendPasswordResetEmail = async (
       font-weight: bold;
     ">Reset Password</a>
   `;
-  await sendEmail(email, 'Password Reset Request', html);
+  await sendEmail(email, "Password Reset Request", html);
 };

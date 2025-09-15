@@ -5,7 +5,7 @@ import { logout } from "../store/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api",
-  credentials: "include", // ✅ sends cookies
+  credentials: "include", // sends cookies
 });
 
 export const baseQueryWithRefresh: BaseQueryFn<

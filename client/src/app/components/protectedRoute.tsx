@@ -25,26 +25,27 @@ const ProtectedRoute = ({ children }: Props) => {
     // redirect only if user is truly unaunthenticated
     if (!isAuthenticated) {
       router.replace("/signin");
-    };
+    }
   }, [isAuthenticated, rehydrated, router]);
 
-
-//   show loading spinner while waiting for rehydration
+  //   show loading spinner while waiting for rehydration
   if (!rehydrated) {
-      return (<main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-        <p className="text-gray-500 text-sm">Loading ...</p>
-      </main>);
-    }
-    // handle edge case: authenticated but no user data
-    if (!user && isAuthenticated) {
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-500 text-sm">
-          User data missing. Please log in again.
-        </p>
-      </div>;
-    }
-  
-    // render protected content if authenticated
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <Spinner />
+      </main>
+    );
+  }
+  // handle edge case: authenticated but no user data
+  if (!user && isAuthenticated) {
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-red-500 text-sm">
+        User data missing. Please log in again.
+      </p>
+    </div>;
+  }
+
+  // render protected content if authenticated
   return isAuthenticated ? <>{children}</> : null;
 };
 export default ProtectedRoute;

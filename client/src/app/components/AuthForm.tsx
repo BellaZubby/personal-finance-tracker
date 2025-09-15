@@ -22,7 +22,6 @@ interface AuthFormProps {
 }
 
 const AuthForm = ({ mode, onSubmit, loading }: AuthFormProps) => {
-
   const router = useRouter();
   // local state to track form input values
   const [formData, setFormData] = useState<AuthFormData>({
@@ -33,12 +32,6 @@ const AuthForm = ({ mode, onSubmit, loading }: AuthFormProps) => {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({}); // to handle form input error state
   const [showPassword, setShowPassword] = useState(false); // to toggle password visibility
-  // const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
-
-  //     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-  //   const { name } = e.target;
-  //   setTouched((prev) => ({ ...prev, [name]: true }));
-  // };
 
   // Handle input changes and update state
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,23 +160,22 @@ const AuthForm = ({ mode, onSubmit, loading }: AuthFormProps) => {
       <div>
         <div className="relative">
           <input
-          type={showPassword ? "text" : "password"}
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          disabled={loading}
-          className="block border-b border-sunPurple outline-0 w-full placeholder:text-sm mt-7"
-        />
-        <button
-          type="button"
-          onClick={() => setShowPassword(!showPassword)}
-          className="absolute top-1/2 -translate-y-1/2 right-5 cursor-pointer"
-        >
-          {showPassword ? <FaEye /> : <FaEyeSlash />}
-        </button>
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            disabled={loading}
+            className="block border-b border-sunPurple outline-0 w-full placeholder:text-sm mt-7"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute top-1/2 -translate-y-1/2 right-5 cursor-pointer"
+          >
+            {showPassword ? <FaEye /> : <FaEyeSlash />}
+          </button>
         </div>
-        
 
         {errors.password && (
           <p className="text-red-500 text-sm">{errors.password}</p>
@@ -197,7 +189,6 @@ const AuthForm = ({ mode, onSubmit, loading }: AuthFormProps) => {
           : mode === "signup"
           ? "Create Account"
           : "Login"}
-        {/* {mode === "signup" ? "Create Account" : "Login"} */}
       </AuthBtn>
 
       <div className="mt-5 text-sm">

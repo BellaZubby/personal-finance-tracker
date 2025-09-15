@@ -5,6 +5,7 @@ import { useResetPasswordMutation, useResolveResetCodeMutation } from '@/app/uti
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
+import AuthGate from '@/app/components/AuthGate';
 
 
 
@@ -12,7 +13,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 const ResetPassword = () => {
     const router = useRouter();
     const searchParams = useSearchParams(); // used to extract email and reset token embedded in the reset link
-    // const email = searchParams.get("email");
     const code = searchParams.get("code");
 
     const [newPassword, setNewPassword] = useState("");
@@ -27,9 +27,6 @@ const ResetPassword = () => {
 
 
     useEffect(() => {
-        // if (!email || !token) {
-        //     router.push("/signin");
-        // }
         const resolveCode = async () => {
           if (!code) {
           router.push("/signin");
@@ -39,7 +36,6 @@ const ResetPassword = () => {
         try {
           const result = await resolveResetCode(code).unwrap();
           setToken(result.token);
-          console.log(token)
         } catch (err:unknown) {
           const message =
           typeof err === "object" && err !== null && "data" in err
@@ -100,7 +96,8 @@ const ResetPassword = () => {
 
 
   return (
-     <main className="min-h-screen flex flex-col items-center justify-center px-4">
+    <AuthGate redirectTo='/'>
+      <main className="min-h-screen flex flex-col items-center justify-center px-4">
       <form onSubmit={handleSubmit} className="max-w-md w-full space-y-6">
 
         <div className="flex flex-col items-center justify-center mb-10">
@@ -132,15 +129,10 @@ const ResetPassword = () => {
                   {passwordVisible? <FaEye /> : <FaEyeSlash />}
                 </button>
           </div>
-           
-       
-
         {validationError && (
             <p className="text-red-500 text-sm ml-3 mt-1">{validationError}</p>
           )}
         </div>
-        
-
         <button
           type="submit"
           disabled={isLoading}
@@ -153,6 +145,8 @@ const ResetPassword = () => {
         {successMessage && <p className="text-green-500 text-sm">{successMessage}</p> }
       </form>
     </main>
+    </AuthGate>
+     
   )
 }
 

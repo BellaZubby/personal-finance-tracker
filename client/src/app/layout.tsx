@@ -3,11 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/Footer";
-// import { Provider } from "react-redux";
-// import { store } from "./store";
-import { Providers } from "./provider"; // we make use of the provider component, this wraps all pages in the Redux provider via the <Providers> component 
+import { Providers } from "./provider"; // we make use of the provider component, this wraps all pages in the Redux provider via the <Providers> component
 import AuthInitializer from "./components/AuthInitializer";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +17,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 
-    {
-    default:"Akulyst",
-    template:"%s | Akulyst"
+  title: {
+    default: "Akulyst",
+    template: "%s | Akulyst",
   },
-  description: "Track your expenses, set goals, and grow your wealth with Akulyst.",
+  description:
+    "Track your expenses, set goals, and grow your wealth with Akulyst.",
 };
 
 const RootLayout = ({
@@ -38,20 +35,16 @@ const RootLayout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers> 
-          <AuthInitializer/>
-              <Navbar/>
-        {/* children is the content of each route (e.g., /signup, /dashboard), anything within the page.tsx */}
-        {children} 
-        <Footer/>
-          
-                  
+        <Providers>
+          <AuthInitializer />
+          <Navbar />
+          {/* children is the content of each route (e.g., /signup, /dashboard), anything within the page.tsx */}
+          {children}
+          <Footer />
         </Providers>
-
       </body>
     </html>
   );
-}
+};
 
-export default RootLayout
-// You can add global providers (like Redux) here 
+export default RootLayout;

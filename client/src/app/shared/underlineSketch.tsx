@@ -1,11 +1,10 @@
 import React from "react";
 
-
 type Props = {
-  className: string
-}
+  className: string;
+};
 
-const UnderlineSketch = ({className}: Props) => {
+const UnderlineSketch = ({ className }: Props) => {
   return (
     <svg
       className={className}

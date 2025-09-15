@@ -1,13 +1,22 @@
-import { FaChartPie, FaMoneyBillWave, FaBullseye, FaTwitter, FaInstagram, FaTiktok, FaLinkedin, FaEnvelope, FaFacebook} from "react-icons/fa";
+import {
+  FaChartPie,
+  FaMoneyBillWave,
+  FaTwitter,
+  FaInstagram,
+  FaTiktok,
+  FaLinkedin,
+  FaEnvelope,
+  FaFacebook,
+} from "react-icons/fa";
 import { IconType } from "react-icons";
-
+import { FaLightbulb } from "react-icons/fa6";
 
 export enum SelectedPage {
-    Home = "home",
-    About = "about",
-    Features = "features",
-    HowItWorks= "howItWorks",
-    FAQ = "faq"
+  Home = "home",
+  About = "about",
+  Features = "features",
+  HowItWorks = "howItWorks",
+  FAQ = "faq",
 }
 
 // define types for navbar menu
@@ -41,7 +50,7 @@ export const menuLinks: Menu[] = [
 ];
 
 // USERS PROFILE NAVIGATION
-interface UserNavLinks  {
+interface UserNavLinks {
   label: string;
   href?: string;
 }
@@ -49,39 +58,38 @@ interface UserNavLinks  {
 export const userNavLinks: UserNavLinks[] = [
   {
     label: "Profile",
-    href: "/profile"
+    href: "/profile",
   },
   {
     label: "Dashboard",
-    href: "/dashboard"
+    href: "/dashboard",
   },
   {
     label: "Logout",
   },
-]
-
+];
 
 export type UserType = {
-  firstName: string; 
-  lastName: string; 
-  isLoggedIn: boolean; 
-  color: string 
-}
+  firstName: string;
+  lastName: string;
+  isLoggedIn: boolean;
+  color: string;
+};
 
 export interface NavProps {
-activeSection: string
-// user: UserType | null
-isAvatarToggled: boolean
-setIsAvatarToggled: React.Dispatch<React.SetStateAction<boolean>>
-scrollToSection : (id: string) => void
-menuLinks : Menu[]
-showMenuLinks: boolean
-userNavLinks: UserNavLinks[]
+  activeSection: string;
+  // user: UserType | null
+  isAvatarToggled: boolean;
+  setIsAvatarToggled: React.Dispatch<React.SetStateAction<boolean>>;
+  scrollToSection: (id: string) => void;
+  menuLinks: Menu[];
+  showMenuLinks: boolean;
+  userNavLinks: UserNavLinks[];
 }
 
 export interface MobileNavProps extends NavProps {
   isMobileMenuOpen: boolean;
-  setIsMobileMenuOpen : React.Dispatch<React.SetStateAction<boolean>>
+  setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // FEATURES
@@ -90,7 +98,6 @@ export type FeatureCardProps = {
   title: string;
   description: string;
   buttonText: string;
-  // onClick: () => void;
   route: string;
 };
 
@@ -99,74 +106,74 @@ export const featureData = [
     id: 1,
     icon: FaChartPie,
     title: "Monthly Budget Setup",
-    description: "Define spending limits across categories like Food, Transport, and Entertainment.",
+    description:
+      "Define spending limits across categories like Food, Transport, and Entertainment.",
     buttonText: "Set Your Budget",
-    route: "/budget"
+    route: "/budget",
   },
   {
     id: 2,
     icon: FaMoneyBillWave,
     title: "Daily Expense Logging",
-    description: "Track your daily expenses with category, amount, date, and notes.",
+    description:
+      "Track your daily expenses with category, amount, date, and notes.",
     buttonText: "Log an Expense",
-    route: "/expense"
+    route: "/expense",
   },
   {
     id: 3,
-    icon: FaBullseye,
-    title: "Savings Goals",
-    description: "Set and monitor progress toward your financial targets.",
-    buttonText: "Create a Goal",
-    route: "/saving"
-  }
+    icon: FaLightbulb,
+    title: "Smart Spending Insights",
+    description:
+      "Get personalized feedback and suggestions based on your spending habits.",
+    buttonText: "View Insights",
+    route: "/dashboard",
+  },
 ];
-
 
 // HOW IT WORKS
 export type howItWorksProps = {
   title: string;
   description: string;
-}
+};
 
-export const steps:howItWorksProps[] = [
+export const steps: howItWorksProps[] = [
   {
     title: "1. Create an Account",
-    description: "Sign up in seconds and unlock access to your personalized financial dashboard.",
+    description:
+      "Sign up in seconds and unlock access to your personalized financial dashboard.",
   },
   {
     title: "2. Set Your Budget",
-    description: "Define your monthly spending limits and allocate funds to what matters most.",
+    description:
+      "Plan your spending over 7 to 30 days and take control of your financial flow.",
   },
   {
     title: "3. Track Your Expenses",
-    description: "Automatically categorize transactions and stay on top of your spending habits.",
-  },
-  {
-    title: "4. Set a Savings Goal",
-    description: "Plan for the future by setting clear, achievable savings targets.",
+    description: "Capture every expense by category, amount, and notes.",
   },
   {
     title: "5. Monitor Your Dashboard",
-    description: "Visualize your financial health with real-time charts and progress indicators.",
+    description:
+      "Visualize your financial health with real-time charts and progress indicators.",
   },
   {
-    title: "6. Get AI-Powered Insights",
-    description: "Receive smart recommendations tailored to your habits and goals—powered by AI.",
+    title: "6. Get Personalized Insights",
+    description:
+      "Discover tailored suggestions based on your spending patterns and progress.",
   },
 ];
 
 type faqsProps = {
   answer: string;
   question: string;
-
-}
+};
 
 // FAQs
-export const faqs:faqsProps[] = [
-   {
+export const faqs: faqsProps[] = [
+  {
     question: "Is Akulyst free to use?",
-    answer:
-      "Yes — Akulyst is entirely free to use"
+    answer: "Yes — Akulyst is entirely free to use",
   },
   {
     question: "How does Akulyst track my expenses?",
@@ -174,47 +181,46 @@ export const faqs:faqsProps[] = [
       "Akulyst lets you log daily expenses by category, amount, and notes. It then visualizes your spending trends in real time.",
   },
   {
-    question: "Can I set multiple savings goals?",
+    question: "Can I monitor my budget progress?",
     answer:
-      "Absolutely! You can create multiple goals, track progress, and get nudges when you're close to achieving them.",
+      "Yes — Akulyst tracks your budget usage over time and provides insights like health scores, behavior flags, and suggestions to guide your decisions.",
   },
   {
-    question: "What makes Akulyst's AI advisor smart?",
+    question: "How does Akulyst help me stay on budget?",
     answer:
-      "It analyzes your spending patterns and flags unusual activity. You’ll get personalized suggestions to help you save more.",
+      "Akulyst tracks your spending against category limits and alerts you when you're approaching or exceeding your budget. It also provides suggestions to help you adjust and stay on track.",
   },
 ];
 
 // Footer-Socials
 type socials = {
-  icon: IconType,
+  icon: IconType;
   href: string;
-}
+};
 
-export const Socials:socials[] = [
+export const Socials: socials[] = [
   {
     icon: FaLinkedin,
-    href: "#"
+    href: "#",
   },
   {
     icon: FaEnvelope,
-    href: "#"
+    href: "#",
   },
   {
     icon: FaInstagram,
-    href: "#"
+    href: "#",
   },
   {
     icon: FaTwitter,
-    href: "#"
+    href: "#",
   },
   {
     icon: FaFacebook,
-    href: "#"
+    href: "#",
   },
   {
     icon: FaTiktok,
-    href: "#"
+    href: "#",
   },
-]
-
+];

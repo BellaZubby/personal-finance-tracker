@@ -1,14 +1,20 @@
 "use client"
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect} from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { Spinner } from "./Spinner";
 
-const AuthGate = ({ children }: { children: React.ReactNode }) => {
+
+type Props = {
+  children: React.ReactNode;
+  redirectTo?: string;
+
+}
+
+const AuthGate = ({ children, redirectTo = "/"}: Props) => {
 
   const router = useRouter();
-
+  const pathname = usePathname();
 
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   const rehydrated = useSelector((state: RootState) => state.auth.rehydrated);
@@ -16,10 +22,13 @@ const AuthGate = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!rehydrated) return;
-    if (isAuthenticated) {
-      router.replace("/");
+
+    // only redirect if user is on a public page
+    const publicPages = ["/signin", "/signup", "/verification", "/forgot-password", "/reset-password"]
+    if (isAuthenticated && publicPages.includes(pathname)) {
+      router.replace(redirectTo);
     }
-  }, [isAuthenticated, rehydrated, router]);
+  }, [isAuthenticated, rehydrated, pathname, router]);
 
   return <>{children}</>;
 };

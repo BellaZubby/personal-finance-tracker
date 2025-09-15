@@ -1,5 +1,5 @@
-import { gmail } from '../config/smtp';
-import { EMAIL_USER } from '../config/dotenv';
+import { gmail } from "../config/smtp";
+import { EMAIL_USER } from "../config/dotenv";
 
 export const sendEmail = async (
   to: string,
@@ -10,19 +10,19 @@ export const sendEmail = async (
     `From: Akulyst <${EMAIL_USER}>`,
     `To: ${to}`,
     `Subject: ${subject}`,
-    'Content-Type: text/html; charset=UTF-8',
-    '',
+    "Content-Type: text/html; charset=UTF-8",
+    "",
     htmlBody,
   ];
 
-  const rawMessage = Buffer.from(messageParts.join('\n'))
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '');
+  const rawMessage = Buffer.from(messageParts.join("\n"))
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
 
   await gmail.users.messages.send({
-    userId: 'me',
+    userId: "me",
     requestBody: {
       raw: rawMessage,
     },

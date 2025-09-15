@@ -10,7 +10,7 @@ export const useLogoutHandler = () => {
 
   const handleLogout = async () => {
     try {
-      await logoutUser().unwrap(); // ✅ pass empty object
+      await logoutUser().unwrap(); // pass empty object
       dispatch(logout());
       router.replace("/signin");
     } catch (err: unknown) {

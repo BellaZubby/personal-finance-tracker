@@ -1,9 +1,9 @@
 import React from "react";
 
 type Props = {
-  className: string
-}
-const Sketch = ({className}: Props) => {
+  className: string;
+};
+const Sketch = ({ className }: Props) => {
   return (
     <svg
       version="1.1"
@@ -20,7 +20,6 @@ const Sketch = ({className}: Props) => {
       <rect
         x="0"
         y="0"
-        // width="274.66668701171875"
         width="254.66668701171875"
         height="45.333343505859375"
         fill="transparent"

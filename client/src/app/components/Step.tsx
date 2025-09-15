@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { motion } from "framer-motion";
 import { howItWorksProps } from "../shared/types";
 
@@ -14,22 +14,18 @@ const fadeLeft = {
 
 const Step = ({ title, description }: howItWorksProps) => (
   <motion.div
-    // variants={fadeUp}
-    // transition={{ duration: 0.7, ease: "easeOut" }}
     className="bg-white shadow-md rounded-lg p-6 mb-6 text-left"
-    //  key={index} 
-          variants={fadeLeft}
-          initial="hidden"
-          whileInView="visible"
-          transition={{ duration: 0.7, ease: "easeOut"}}
-          viewport={{ once: true, amount: 0.5 }}
+    variants={fadeLeft}
+    initial="hidden"
+    whileInView="visible"
+    transition={{ duration: 0.7, ease: "easeOut" }}
+    viewport={{ once: true, amount: 0.5 }}
   >
-<>
-    <h3 className="text-lg font-semibold text-sunPurple mb-2">{title}</h3>
-    <p className="text-gray-700">{description}</p>
-</>
-  
+    <>
+      <h3 className="text-lg font-semibold text-sunPurple mb-2">{title}</h3>
+      <p className="text-gray-700">{description}</p>
+    </>
   </motion.div>
 );
 
-export default Step
+export default Step;

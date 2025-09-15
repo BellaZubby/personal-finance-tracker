@@ -4,13 +4,12 @@ import connectDB from "./config/db_connect";
 import authRoutes from "./routes/authRoutes";
 import budgetRoutes from "./routes/budgetRoutes";
 import expenseRoutes from "./routes/expenseRoute";
-import historyRoutes from "./routes/historyRoutes"
+import historyRoutes from "./routes/historyRoutes";
+import dashboardRoutes from "./routes/dashboardRoute";
 import cors from "cors";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 // created an instance of the express app.
 const app = express();
-
-
 
 const startServer = async () => {
   await connectDB(); // connecting to my database
@@ -22,7 +21,7 @@ const startServer = async () => {
     })
   );
 
-  app.use(cookieParser())
+  app.use(cookieParser());
 
   app.use(express.json());
 
@@ -30,6 +29,7 @@ const startServer = async () => {
   app.use("/api/budget", budgetRoutes);
   app.use("/api/expense", expenseRoutes);
   app.use("/api/history", historyRoutes);
+  app.use("/api/dashboard", dashboardRoutes);
 
   app.get("/", (req: Request, res: Response) => {
     res.send("Server is live");

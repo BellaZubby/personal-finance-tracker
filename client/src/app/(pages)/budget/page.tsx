@@ -1,5 +1,4 @@
 "use client";
-
 import ProtectedRoute from "@/app/components/protectedRoute";
 import React from "react";
 import BudgetSetup from "./budgetComponents/BudgetSetup";

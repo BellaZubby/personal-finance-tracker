@@ -12,9 +12,8 @@ const VerificationLayout = ({
 }>) => {
   return (
     <div>
-        {/* <Navbar/> */}
           {children}
-        {/* <Footer/> */}
+      
     </div> 
   );
 };

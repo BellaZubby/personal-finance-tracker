@@ -1,14 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi} from "@reduxjs/toolkit/query/react";
 import { AuthFormData } from "../components/AuthForm";
 import { baseQueryWithRefresh } from "./baseQueryWithRefresh";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-//   baseQuery: fetchBaseQuery({
-//     baseUrl:
-//     process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api",
-//     credentials: "include", // sends cookies with every request
-//   }),
     baseQuery: baseQueryWithRefresh,
     endpoints: (builder) => ({
     signupUser: builder.mutation({
@@ -55,10 +50,7 @@ export const authApi = createApi({
     body: { code },
   }),
 }),
-
-    
     resetPassword: builder.mutation({
-      // query: (data: { email: string; token: string; newPassword: string }) => ({
       query: (data: {token: string; newPassword: string }) => ({
         url: "/auth/reset-password",
         method: "POST",

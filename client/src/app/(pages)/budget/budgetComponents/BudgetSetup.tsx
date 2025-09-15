@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryForm from "./CategoryForm";
 import CategoryCard from "./CategoryCard";
 import { motion } from "framer-motion";
@@ -12,15 +12,42 @@ import {
   removeCategory,
   saveBudget,
   setError,
+  resetBudget,
 } from "@/app/store/budgetSlice";
 import BudgetSummary from "./BudgetSummary";
 import SaveModal from "@/app/components/SaveModal";
+import {
+  useCreateBudgetMutation,
+  useDeleteBudgetMutation,
+  useGetCurrentBudgetQuery,
+} from "@/app/utils/budgetApi";
+import { Spinner } from "@/app/components/Spinner";
+import DeleteModal from "@/app/components/deleteModal";
 
 const BudgetSetup = () => {
   const dispatch = useDispatch();
 
+  // extract my save budget slice
+  const [createBudget, { data: responseData, isSuccess }] =
+    useCreateBudgetMutation();
+
   // local states
   const [showModal, setShowModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [deleteSuccessMessage, setDeleteSuccessMessage] = useState("");
+  const [showDeleteBudgetModal, setShowDeleteBudgetModal] = useState(false);
+
+  // fetch current budget from backend
+  const {
+    data,
+    isLoading: budgetLoading,
+    refetch, // method used to refetch data from the backend after a successful save.
+  } = useGetCurrentBudgetQuery();
+  const budget = data?.data;
+  const isExpired = data?.isExpired;
+  const exists = data?.exists;
+
+  const [deleteBudget] = useDeleteBudgetMutation();
 
   // select redux state
   const duration = useSelector((state: RootState) => state.budget.duration);
@@ -28,9 +55,8 @@ const BudgetSetup = () => {
     (state: RootState) => state.budget.durationConfirmed
   );
   const categories = useSelector((state: RootState) => state.budget.categories);
-  const isBudgetSaved = useSelector((state: RootState) => state.budget.isSaved);
   const error = useSelector((state: RootState) => state.budget.error);
-  const user = useSelector((state:RootState) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const handleConfirmDuration = () => {
     if (duration && duration >= 7 && duration <= 30) {
@@ -49,15 +75,122 @@ const BudgetSetup = () => {
   const handleDeleteCategory = (name: string) => {
     dispatch(removeCategory(name));
   };
+
+  // Save budget
+  const handleSaveBudget = async () => {
+    // define expected data
+    const payload = {
+      duration,
+      categories,
+    };
+    try {
+      await createBudget(payload).unwrap();
+      dispatch(saveBudget()); // updates local state
+      refetch(); // Pulls updated budget into frontend
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "data" in err) {
+        const message =
+          (err as any).data?.message ||
+          "Failed to save budget. Please try again";
+        dispatch(setError(message));
+      } else {
+        dispatch(setError("Failed to save budget.Please try again"));
+      }
+    }
+  };
+
+  // DELETE BUDGET
+  const handleDeleteBudget = async () => {
+    try {
+      await deleteBudget().unwrap();
+      dispatch(resetBudget());
+      setDeleteSuccessMessage("Budget reset successful");
+
+      // Refetch the current budget to update the UI
+      refetch();
+      setShowDeleteBudgetModal(false);
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "data" in err) {
+        const message =
+          (err as any).data?.message ||
+          "Failed to save budget. Please try again";
+        dispatch(setError(message));
+      } else {
+        dispatch(setError("Failed to save budget.Please try again"));
+      }
+    }
+  };
+
+  // displaying the success message
+  useEffect(() => {
+    if (isSuccess && responseData?.message) {
+      setSuccessMessage(responseData.message);
+
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess, responseData]);
+
+  // to auto clear budget reset success message
+  useEffect(() => {
+    if (deleteSuccessMessage) {
+      const timer = setTimeout(() => {
+        setDeleteSuccessMessage("");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [deleteSuccessMessage]);
+
+  // Loading state
+  if (budgetLoading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <Spinner />
+      </main>
+    );
+  }
+
   return (
     <div className="max-w-2xl mx-auto py-10 px-4">
-      {isBudgetSaved ? (
-        <BudgetSummary />
+      {/* displaying the create budget success message */}
+      {successMessage && (
+        <p className="text-green-600 text-center mb-4 font-medium">
+          {successMessage}
+        </p>
+      )}
+      {deleteSuccessMessage && (
+        <p className="text-green-600 text-center mb-4 font-medium">
+          {deleteSuccessMessage}
+        </p>
+      )}
+
+      {exists && !isExpired ? (
+        <>
+          {exists && isExpired && (
+            <p className="text-red-500 font-semibold text-center mb-4">
+              Your budget has expired.
+            </p>
+          )}
+          {budget && (
+            <BudgetSummary
+              budget={budget}
+              onRequestDelete={() => setShowDeleteBudgetModal(true)}
+            />
+          )}
+        </>
       ) : !durationConfirmed ? (
         <div className="flex flex-col items-center justify-center">
           <div className="text-center mb-6">
-            <h1 className="text-sunPurple font-bold text-3xl mb-3">Smart budgeting starts here</h1>
-            <p className="text-textColor font-medium text-xl">Welcome {user?.firstName}, please set a budget duration to proceed!</p>
+            <h1 className="text-sunPurple font-bold sm:text-2xl text-lg mb-3">
+              Smart budgeting starts here
+            </h1>
+            <p className="text-textColor font-medium sm:text-xl text-sm">
+              Welcome {user?.firstName}, please set a budget duration to
+              proceed!
+            </p>
           </div>
           <label className="text-lg font-semibold mb-2">
             Set Budget Duration (7–30 days)
@@ -81,56 +214,72 @@ const BudgetSetup = () => {
         </div>
       ) : categories.length === 0 ? (
         <div className="flex flex-col items-center justify-center">
-           <div className="text-center mb-6">
-            <h1 className="text-sunPurple font-semibold text-xl mb-3">Set budget amount for different categories</h1>
+          <div className="text-center mb-6">
+            <h1 className="text-sunPurple font-semibold text-xl mb-3">
+              Set budget amount for different categories
+            </h1>
             <p>🥘 🚌 🎦 🛍️</p>
-            {/* <p className="text-textColor font-medium text-xl">Welcome {user?.firstName}, please set a budget duration to proceed!</p> */}
           </div>
           <CategoryForm onAddCategory={handleAddCategory} />
         </div>
       ) : (
         <div>
-           <div className="text-center mb-6">
-            <h1 className="text-sunPurple font-semibold text-xl mb-3">Set budget amount for different categories</h1>
+          <div className="text-center mb-6">
+            <h1 className="text-sunPurple font-semibold text-xl mb-3">
+              Set budget amount for different categories
+            </h1>
             <p>🥘 🚌 🎦 🛍️</p>
-            {/* <p className="text-textColor font-medium text-xl">Welcome {user?.firstName}, please set a budget duration to proceed!</p> */}
           </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start justify-center">
-          <div>
-            <CategoryForm onAddCategory={handleAddCategory} />
-          </div>
-
-          <div className="space-y-4">
-            {categories.map((cat) => (
-              <motion.div
-                key={cat.name}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <CategoryCard
-                  name={cat.name}
-                  amount={cat.amount}
-                  onDelete={() => handleDeleteCategory(cat.name)}
-                  isEditable={!isBudgetSaved}
-                />
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start justify-center">
+            <div>
+              <CategoryForm onAddCategory={handleAddCategory} />
+              {/* save budget button */}
+              <div>
+                {!exists && categories.length > 0 && (
+                  <button
+                    onClick={() => setShowModal(!showModal)}
+                    className="mt-6 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                  >
+                    Save Budget
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className="space-y-4">
+              {categories.map((cat) => (
+                <motion.div
+                  key={cat.name}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <CategoryCard
+                    name={cat.name}
+                    amount={cat.amount}
+                    onDelete={() => handleDeleteCategory(cat.name)}
+                    isEditable={!exists}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
-        </div>
-        
       )}
       {/* budget btn */}
-      {!isBudgetSaved && categories.length > 0 && (
-        <button
-          onClick={() => setShowModal(!showModal)}
-          className="mt-6 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Save Budget
-        </button>
+      {showModal && (
+        <SaveModal
+          modalControl={() => setShowModal(!showModal)}
+          onSave={handleSaveBudget}
+        />
       )}
-      {showModal && <SaveModal onClick = {() => setShowModal(!showModal)}/>}
+
+      {/* budget reset modal */}
+      {showDeleteBudgetModal && (
+        <DeleteModal
+          onConfirm={handleDeleteBudget}
+          onCancel={() => setShowDeleteBudgetModal(false)}
+        />
+      )}
     </div>
   );
 };

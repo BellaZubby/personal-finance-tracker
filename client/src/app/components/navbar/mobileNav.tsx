@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import { MobileNavProps } from "@/app/shared/types";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { AppDispatch, RootState } from "@/app/store";
-import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/app/store";
+import { useSelector } from "react-redux";
 import UserAvatar from "../UserAvatar";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useLogoutHandler } from "@/app/shared/useLogoutHandler";
 
 const MobileNav = ({
@@ -21,20 +21,17 @@ const MobileNav = ({
   showMenuLinks,
   userNavLinks,
 }: MobileNavProps) => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
-   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-   const dispatch = useDispatch<AppDispatch>();
+  const pathname = usePathname();
+  const handleLogout = useLogoutHandler();
 
-   const router = useRouter();
+  useEffect(() => {
+    setIsAvatarToggled(false);
+  }, [pathname]);
 
-   const pathname = usePathname();
-   const handleLogout = useLogoutHandler();
-   
-   
-     useEffect(() => {
-       setIsAvatarToggled(false);
-     }, [pathname]);
-   
   return (
     <div className="flex items-center justify-between lg:hidden">
       {/* Logo */}
@@ -57,11 +54,9 @@ const MobileNav = ({
             {/* Initials Avatar */}
             <div
               onClick={() => setIsAvatarToggled(!isAvatarToggled)}
-              className={`text-white rounded-full w-10 h-10 flex items-center justify-center cursor-pointer bg-rockies`}
+              className={`text-white rounded-full w-10 h-10 flex items-center justify-center cursor-pointer bg-sunPurple`}
             >
-              {/* {user.firstName[0]}
-              {user.lastName[0]} */}
-              <UserAvatar/>
+              <UserAvatar />
             </div>
 
             {/* Dropdown Menu */}
@@ -75,7 +70,13 @@ const MobileNav = ({
                       </div>
                     </Link>
                   ) : (
-                    <button key={index} onClick={handleLogout} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">{link.label}</button>
+                    <button
+                      key={index}
+                      onClick={handleLogout}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    >
+                      {link.label}
+                    </button>
                   )
                 )}
               </div>

@@ -1,11 +1,10 @@
-import Image from "next/image";
 import LandingPage from "./(pages)/LandingPage";
-import { generateRandomColor } from "./utils/generateRandomColor";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className="">
-     <LandingPage/>
-    </div>
+    <main>
+      <LandingPage />
+    </main>
   );
-}
+};
+export default Home;

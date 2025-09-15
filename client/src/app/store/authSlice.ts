@@ -53,10 +53,11 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.pendingUser = null;
 
-      // ✅ Persist token to localStorage
+      // Persist token to localStorage
       // localStorage.setItem("authToken", action.payload.token);
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.removeItem("pendingUser");
+      state.rehydrated = true;
     },
 
     logout: (state) => {
@@ -91,14 +92,13 @@ const authSlice = createSlice({
       if (firstName) state.user.firstName = firstName;
       if (lastName) state.user.lastName = lastName;
 
-      // ✅ Save updated user to localStorage
-  localStorage.setItem("user", JSON.stringify(state.user));
-
-},
+      // Save updated user to localStorage
+      localStorage.setItem("user", JSON.stringify(state.user));
+    },
   },
 });
 
-export const { login, logout, setPendingUser, rehydrateAuth, updateProfile} =
+export const { login, logout, setPendingUser, rehydrateAuth, updateProfile } =
   authSlice.actions; // we export both actions to use in components
 
 export default authSlice.reducer; // export the reducer to plug into your Redux store

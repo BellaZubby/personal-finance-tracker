@@ -4,11 +4,8 @@ import About from '../scenes/About'
 import Features from '../scenes/Features'
 import HowItWorks from '../scenes/HowItWorks'
 import FAQ from '../scenes/FAQ'
-import Navbar from '../components/navbar'
 
-type Props = {}
-
-const LandingPage = (props: Props) => {
+const LandingPage = () => {
   return (
     <div>
         <Hero/>

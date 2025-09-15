@@ -1,5 +1,5 @@
 "use client";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setError } from "@/app/store/budgetSlice";
 import { AppDispatch, RootState } from "@/app/store";
@@ -12,15 +12,16 @@ const availableCategories = [
   "Food",
   "Transportation",
   "Entertainment",
+  "Airtime/Data",
+  "Rent",
+  "Medicals",
+  "Wardrobe",
   "Others",
 ];
 
 const CategoryForm = ({ onAddCategory }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [amount, setAmount] = useState("");
-  // const [showMessage, setShowMessage] = useState(false);
-
-  // const [error, setError] = useState("");
 
   const dispatch = useDispatch<AppDispatch>();
   const error = useSelector((state: RootState) => state.budget.error);
@@ -56,7 +57,6 @@ const CategoryForm = ({ onAddCategory }: Props) => {
     onAddCategory(selectedCategory, numericAmount);
     setSelectedCategory("");
     setAmount("");
-    // dispatch(setError(""));
   };
   return (
     <div className="mt-8">
@@ -69,10 +69,19 @@ const CategoryForm = ({ onAddCategory }: Props) => {
           setSelectedCategory(e.target.value);
           dispatch(setError(""));
         }}
-        className="mt-1 block w-full px-3 py-2 border rounded-md"
+        className="mt-1 block w-full px-3 py-2 border rounded-md outline-0"
       >
         <option value="">-- Select --</option>
-        {["Food", "Transportation", "Entertainment", "Others"].map((cat) => (
+        {[
+          "Food",
+          "Transportation",
+          "Entertainment",
+          "Airtime/Data",
+          "Rent",
+          "Medicals",
+          "Wardrobe",
+          "Others",
+        ].map((cat) => (
           <option key={cat} value={cat}>
             {cat}
           </option>
@@ -89,7 +98,7 @@ const CategoryForm = ({ onAddCategory }: Props) => {
           setAmount(e.target.value);
           dispatch(setError(""));
         }}
-        className="mt-1 block w-full px-3 py-2 border rounded-md"
+        className="mt-1 block w-full px-3 py-2 border rounded-md outline-0"
       />
 
       <button
@@ -98,7 +107,7 @@ const CategoryForm = ({ onAddCategory }: Props) => {
           allAdded
             ? "bg-gray-400 cursor-not-allowed"
             : "bg-sunPurple text-white hover:bg-sunPurple/90"
-        } mt-4 px-4 py-2 rounded`}
+        } mt-4 px-4 py-2 rounded cursor-pointer`}
       >
         Add Category
       </button>

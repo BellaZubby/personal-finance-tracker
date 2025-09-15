@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaXmark } from "react-icons/fa6"; 
+import { FaXmark } from "react-icons/fa6";
 import { faqs } from "../shared/types";
 import HeaderText from "../shared/HeaderText";
 import UnderlineSketch from "../shared/underlineSketch";
@@ -10,28 +10,26 @@ const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-12 px-4 bg-sunPurple/60 text-white font-inter">
-     <motion.div 
-       initial = {{opacity: 0}}
-       whileInView={{opacity: 1}}
+    <section
+      id="faq"
+      className="py-12 px-4 bg-sunPurple/60 text-white font-inter"
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.6 }}
         transition={{ duration: 1.4, ease: "easeOut" }}
-       className="max-w-6xl mx-auto text-center mb-12">
-        {/* <h2 className="text-4xl font-bold text-sunPurple">Your Financial Toolkit</h2> */}
+        className="max-w-6xl mx-auto text-center mb-12"
+      >
         <div className="relative">
-           <HeaderText>FAQs</HeaderText>
-           <UnderlineSketch className="absolute left-[50%] -translate-x-1/2 top-8"/>
+          <HeaderText>FAQs</HeaderText>
+          <UnderlineSketch className="absolute left-[50%] -translate-x-1/2 top-8" />
         </div>
-        <p className="text-white mt-3">
-          Got questions? We've got clarity.
-        </p>
+        <p className="text-white mt-3">Got questions? We've got clarity.</p>
       </motion.div>
       <div className="max-w-xl mx-auto space-y-4">
         {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="border rounded-lg p-4 shadow-sm bg-white"
-          >
+          <div key={index} className="border rounded-lg p-4 shadow-sm bg-white">
             <button
               onClick={() =>
                 setActiveIndex(activeIndex === index ? null : index)
@@ -64,6 +62,6 @@ const FAQ = () => {
       </div>
     </section>
   );
-}
+};
 
-export default FAQ
+export default FAQ;
