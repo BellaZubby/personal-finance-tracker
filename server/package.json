@@ -4,9 +4,11 @@
   "description": "This is a personal finance tracker with features such as budgeting tools, real-time rexpense tracking, and AI-powered insight",
   "main": "server.ts",
   "scripts": {
-    "start": "node server.ts",
-    "dev": "nodemon server.ts"
-  },
+  "build": "tsc",
+  "start": "node dist/server.js",
+  "dev": "nodemon server.ts"
+},
+
   "author": "Nwankwo Nzubechukwu",
   "license": "ISC",
   "dependencies": {
