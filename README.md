@@ -30,7 +30,7 @@ Akulyst is a full-stack MERN application designed to help users take control of 
 - Backend: Node.js, Express.js, Mongoose
 - Database: MongoDB
 - Authentication: JWT
-- AI Logic: Rule-based analysis with potential for ML integration
+- Feedback Logic: Rule-based analysis with potential for ML integration
 
 ---
 
@@ -39,4 +39,4 @@ Akulyst is a full-stack MERN application designed to help users take control of 
 - Help users build financial discipline through structured budgeting.
 - Provide real-time feedback and coaching via personalized insights.
 - Deliver a user-friendly interface that encourages consistent engagement.
-- Explore the integration of intelligent systems in personal finance applications.
+
