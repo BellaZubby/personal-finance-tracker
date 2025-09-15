@@ -306,12 +306,12 @@ const DashboardSetup = () => {
               .map(([date, entries]) => (
                 <div
                   key={date}
-                  className="border rounded-md p-4 bg-white shadow-sm transition-all duration-300"
+                  className="border rounded-md p-4 bg-white shadow-sm transition-all duration-300 cursor-pointer"
                 >
                   {/* Date header with toggle */}
                   <button
                     onClick={() => toggleDate(date)}
-                    className="w-full text-left flex justify-between items-center"
+                    className="w-full text-left flex justify-between items-center cursor-pointer"
                   >
                     <span className="font-normal text-sunPurple">{date}</span>
                     <span className="text-sm text-gray-500">

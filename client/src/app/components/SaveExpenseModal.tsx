@@ -19,13 +19,13 @@ const SaveExpenseModal = ({ onConfirm, onCancel }: Props) => {
         <div className="flex justify-end space-x-4">
           <button
             onClick={onCancel}
-            className="px-4 py-2 text-gray-700 hover:underline"
+            className="px-4 py-2 text-gray-700 hover:underline cursor-pointer"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
-            className="px-4 py-2 bg-sunPurple text-white rounded hover:bg-sunPurple/90"
+            className="px-4 py-2 bg-sunPurple text-white rounded hover:bg-sunPurple/90 cursor-pointer"
           >
             Save Expenses
           </button>

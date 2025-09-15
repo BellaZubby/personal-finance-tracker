@@ -145,7 +145,7 @@ const VerificationPage = () => {
                 height={80}
               />
             </Link>
-            <p className="text-textColor mt-3">
+            <p className="text-textColor mt-3 px-3">
               Please enter OTP sent to registered Email to verify your account
             </p>
           </div>

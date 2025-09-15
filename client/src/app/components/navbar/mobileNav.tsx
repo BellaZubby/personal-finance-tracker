@@ -148,7 +148,7 @@ const MobileNav = ({
                       </li>
                     ))}
                     {!isAuthenticated && (
-                      <Link href={"/login"}>
+                      <Link href={"/signin"}>
                         <button className="bg-sunPurple text-white px-4 py-2 rounded hover:bg-hallmark transition">
                           Login
                         </button>
