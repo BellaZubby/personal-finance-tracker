@@ -11,12 +11,18 @@ import cookieParser from "cookie-parser";
 // created an instance of the express app.
 const app = express();
 
+// allowedOrigins for cors
+const allowedOrigins = [
+  "https://akulyst.vercel.app",
+  "http://localhost:3000" // for local development
+]
+
 const startServer = async () => {
   await connectDB(); // connecting to my database
 
   app.use(
     cors({
-      origin: ["http://localhost:3000"], // or your deployed frontend URL
+      origin: allowedOrigins, // or your deployed frontend URL
       credentials: true, // if you're using cookies or auth headers
     })
   );
