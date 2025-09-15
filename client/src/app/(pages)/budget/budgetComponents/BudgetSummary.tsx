@@ -40,7 +40,7 @@ const BudgetSummary = ({ budget, onRequestDelete }: Props) => {
           <p>
             <strong>End Date:</strong> {formattedEnd}
           </p>
-          <p className="mt-2 text-red-500 text-xs">
+          <p className="mt-2 text-red-500 text-sm">
             You cannot edit this budget. To set a new one, you must delete the
             current budget.
           </p>

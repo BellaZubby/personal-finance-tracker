@@ -235,7 +235,7 @@ const ExpenseSetup = () => {
           name="categoryName"
           value={form.categoryName}
           onChange={handleChange}
-          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple"
+          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple h-12"
         >
           <option value="">Select Category</option>
           {budget?.categories.map((cat) => (
@@ -251,7 +251,7 @@ const ExpenseSetup = () => {
           value={form.amount}
           onChange={handleChange}
           placeholder="Amount"
-          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple"
+          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple h-12"
         />
 
         <input
@@ -259,13 +259,13 @@ const ExpenseSetup = () => {
           value={form.note}
           onChange={handleChange}
           placeholder="Optional Note"
-          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple"
+          className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple h-12"
         />
 
         <button
           type="submit"
           disabled={unsavedExpenses.length >= remainingSlots}
-          className={`px-4 py-2 rounded  w-full ${
+          className={`px-5 py-3 rounded  w-full ${
             unsavedExpenses.length >= remainingSlots
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-sunPurple text-white hover:bg-sunPurple/90"
@@ -309,7 +309,7 @@ const ExpenseSetup = () => {
         <button
           disabled={unsavedExpenses.length > remainingSlots}
           onClick={() => setShowModal(true)}
-          className={`mt-6 text-white px-4 py-2 rounded w-full ${
+          className={`mt-6 text-white px-5 py-3 rounded w-full ${
             unsavedExpenses.length > remainingSlots
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-green-600 text-white hover:bg-green-700"

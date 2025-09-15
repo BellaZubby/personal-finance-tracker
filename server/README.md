@@ -45,3 +45,8 @@ The backend powers the core logic, authentication, database management, and API 
 - Deliver a **scalable backend API** to support the Akulyst frontend.  
 
 ---
+
+## Links
+
+- **Frontend (Vercel):** : (https://akulyst.vercel.app)
+- **Backend (Render):** : (https://akulyst.onrender.com)

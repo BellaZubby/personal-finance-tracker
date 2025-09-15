@@ -15,7 +15,7 @@ const FeatureCard = ({
     <h3 className="text-xl font-bold mb-2 text-sunPurple">{title}</h3>
     <p className="text-textColor mb-4">{description}</p>
     <Link href={route}>
-      <button className="bg-sunPurple font-inter group-hover:bg-amber text-amber cursor-pointer group-hover:text-textColor px-4 py-2 rounded-full transition-colors font-bold duration-500 ease-in-out">
+      <button className="bg-sunPurple font-inter group-hover:bg-amber text-amber cursor-pointer group-hover:text-textColor px-5 py-3 rounded-full transition-colors font-bold duration-500 ease-in-out">
         {buttonText}
       </button>
     </Link>

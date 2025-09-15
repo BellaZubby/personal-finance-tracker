@@ -61,7 +61,7 @@ const MobileNav = ({
 
             {/* Dropdown Menu */}
             {isAvatarToggled && (
-              <div className="absolute right-0 mt-2 w-32 bg-white shadow-md rounded z-10">
+              <div className="absolute right-0 mt-2 w-36 bg-white shadow-md rounded z-10 text-lg">
                 {userNavLinks.map((link, index) =>
                   link.href ? (
                     <Link key={index} href={link.href}>
@@ -133,7 +133,7 @@ const MobileNav = ({
                   transition={{ duration: 0.3 }}
                   className="absolute top-full left-0 w-full bg-white shadow-md"
                 >
-                  <ul className="flex flex-col items-center py-4 gap-4">
+                  <ul className="flex flex-col items-center py-4 gap-4 text-lg">
                     {menuLinks.map((item) => (
                       <li
                         key={item.id}

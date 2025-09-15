@@ -23,6 +23,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import Link from "next/link";
 
 const DashboardSetup = () => {
   // RTK Query
@@ -139,14 +140,14 @@ const DashboardSetup = () => {
   // No budget fallback
   if (error || !data?.data) {
     return (
-      <div className="text-center py-10">
-        <p className="text-gray-600 mb-4">
+      <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <p className="text-gray-600 mb-6 text-lg">
           You don&apos;t have any budget data to view.
         </p>
-        <p className="text-sunPurple font-medium">
+        <Link href={"/budget"} className="text-sunPurple underline font-medium text-lg">
           Set up a budget to unlock your dashboard insights.
-        </p>
-      </div>
+        </Link>
+      </main>
     );
   }
 

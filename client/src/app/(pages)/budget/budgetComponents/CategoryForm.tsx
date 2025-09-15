@@ -69,7 +69,7 @@ const CategoryForm = ({ onAddCategory }: Props) => {
           setSelectedCategory(e.target.value);
           dispatch(setError(""));
         }}
-        className="mt-1 block w-full px-3 py-2 border rounded-md outline-0"
+        className="mt-1 block w-full px-3 py-2 border rounded-md outline-0 h-12"
       >
         <option value="">-- Select --</option>
         {[
@@ -98,7 +98,7 @@ const CategoryForm = ({ onAddCategory }: Props) => {
           setAmount(e.target.value);
           dispatch(setError(""));
         }}
-        className="mt-1 block w-full px-3 py-2 border rounded-md outline-0"
+        className="mt-1 block w-full px-3 py-2 border rounded-md outline-0 h-12"
       />
 
       <button
@@ -107,7 +107,7 @@ const CategoryForm = ({ onAddCategory }: Props) => {
           allAdded
             ? "bg-gray-400 cursor-not-allowed"
             : "bg-sunPurple text-white hover:bg-sunPurple/90"
-        } mt-4 px-4 py-2 rounded cursor-pointer`}
+        } mt-4 px-4 py-3 rounded cursor-pointer`}
       >
         Add Category
       </button>

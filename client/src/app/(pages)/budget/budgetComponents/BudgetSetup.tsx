@@ -185,10 +185,10 @@ const BudgetSetup = () => {
       ) : !durationConfirmed ? (
         <div className="flex flex-col items-center justify-center">
           <div className="text-center mb-6">
-            <h1 className="text-sunPurple font-bold sm:text-2xl text-lg mb-3">
+            <h1 className="text-sunPurple font-bold sm:text-2xl text-xl mb-3">
               Smart budgeting starts here
             </h1>
-            <p className="text-textColor font-medium sm:text-xl text-sm">
+            <p className="text-textColor font-medium sm:text-xl text-lg">
               Welcome {user?.firstName}, please set a budget duration to
               proceed!
             </p>
@@ -203,11 +203,11 @@ const BudgetSetup = () => {
             value={duration ?? ""}
             onChange={(e) => dispatch(setDuration(Number(e.target.value)))}
             disabled={durationConfirmed}
-            className="border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple"
+            className="border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sunPurple h-14 w-[200px]"
           />
           <button
             onClick={handleConfirmDuration}
-            className="mt-4 bg-sunPurple text-white px-4 py-2 rounded hover:bg-sunPurple/90"
+            className="mt-4 bg-sunPurple text-white px-5 py-3 rounded hover:bg-sunPurple/90 "
           >
             Confirm Duration
           </button>

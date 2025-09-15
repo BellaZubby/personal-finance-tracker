@@ -36,3 +36,9 @@ Akulyst is a full-stack MERN application designed to help users take control of 
 - Provide real-time feedback and coaching via personalized insights.
 - Deliver a user-friendly interface that encourages consistent engagement.
 
+---
+
+## Links
+
+- **Frontend (Vercel):** : (https://akulyst.vercel.app)
+- **Backend (Render):** : (https://akulyst.onrender.com)

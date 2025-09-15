@@ -11,7 +11,7 @@ const SaveModal = ({ modalControl, onSave }: Props) => {
         <h3 className="text-lg font-semibold text-gray-800 mb-2">
           Confirm Save
         </h3>
-        <p className="text-sm text-gray-600">
+        <p className="text-gray-600">
           Once saved, your budget cannot be edited. To make changes, you&apos;ll
           need to reset budget.
         </p>
