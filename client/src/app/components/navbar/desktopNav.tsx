@@ -26,7 +26,7 @@ const DesktopNav = ({
 
   useEffect(() => {
     setIsAvatarToggled(false);
-  }, [pathname]);
+  }, [pathname, setIsAvatarToggled]);
 
   return (
     <div className="flex items-center justify-between">

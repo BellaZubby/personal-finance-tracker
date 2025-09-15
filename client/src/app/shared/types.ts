@@ -224,3 +224,16 @@ export const Socials: socials[] = [
     href: "#",
   },
 ];
+
+export interface APIError {
+  data?: {
+    message?: string;
+  };
+}
+
+export interface OTPError {
+  data?: {
+    message?: string;
+    code?: string;
+  };
+}

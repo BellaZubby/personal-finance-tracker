@@ -5,6 +5,7 @@ import { useForgotPasswordMutation } from "@/app/utils/authApi";
 import Link from "next/link";
 import Image from "next/image";
 import AuthGate from "@/app/components/AuthGate";
+import { APIError } from "@/app/shared/types";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -44,7 +45,7 @@ const ForgotPassword = () => {
       } catch (err: unknown) {
         if (typeof err === "object" && err !== null && "data" in err) {
           const message =
-            (err as any).data?.message || "Failed to send reset link";
+            (err as APIError).data?.message || "Failed to send reset link";
           setError(message);
         } else {
           setError("An unexpected error occurred.");

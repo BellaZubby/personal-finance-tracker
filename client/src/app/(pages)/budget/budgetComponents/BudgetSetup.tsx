@@ -23,6 +23,7 @@ import {
 } from "@/app/utils/budgetApi";
 import { Spinner } from "@/app/components/Spinner";
 import DeleteModal from "@/app/components/deleteModal";
+import { APIError } from "@/app/shared/types";
 
 const BudgetSetup = () => {
   const dispatch = useDispatch();
@@ -90,7 +91,7 @@ const BudgetSetup = () => {
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
         const message =
-          (err as any).data?.message ||
+          (err as APIError).data?.message ||
           "Failed to save budget. Please try again";
         dispatch(setError(message));
       } else {
@@ -112,7 +113,7 @@ const BudgetSetup = () => {
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
         const message =
-          (err as any).data?.message ||
+          (err as APIError).data?.message ||
           "Failed to save budget. Please try again";
         dispatch(setError(message));
       } else {

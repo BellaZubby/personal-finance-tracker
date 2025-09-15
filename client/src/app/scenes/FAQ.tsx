@@ -25,7 +25,7 @@ const FAQ = () => {
           <HeaderText>FAQs</HeaderText>
           <UnderlineSketch className="absolute left-[50%] -translate-x-1/2 top-8" />
         </div>
-        <p className="text-white mt-3">Got questions? We've got clarity.</p>
+        <p className="text-white mt-3">Got questions? We&apos;ve got clarity.</p>
       </motion.div>
       <div className="max-w-xl mx-auto space-y-4">
         {faqs.map((faq, index) => (

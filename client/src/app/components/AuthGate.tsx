@@ -28,7 +28,7 @@ const AuthGate = ({ children, redirectTo = "/"}: Props) => {
     if (isAuthenticated && publicPages.includes(pathname)) {
       router.replace(redirectTo);
     }
-  }, [isAuthenticated, rehydrated, pathname, router]);
+  }, [isAuthenticated, rehydrated, pathname, router, redirectTo]);
 
   return <>{children}</>;
 };

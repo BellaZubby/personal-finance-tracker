@@ -195,7 +195,7 @@ const AuthForm = ({ mode, onSubmit, loading }: AuthFormProps) => {
         {mode === "signin" ? (
           <div className="flex flex-col xs:flex-row gap-3 md:gap-0 items-center justify-between">
             <p>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/signup" className="text-sunPurple font-semibold">
                 Sign up
               </Link>

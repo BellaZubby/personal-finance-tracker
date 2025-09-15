@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/app/store/authSlice";
 import { RootState } from "@/app/store";
 import AuthGate from "@/app/components/AuthGate";
+import { APIError, OTPError } from "@/app/shared/types";
 
 interface verificationResponse {
   message: string;
@@ -93,11 +94,11 @@ const VerificationPage = () => {
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
         // Show resend button only if OTP expired
-        const errorData = (err as any).data;
-        setError(errorData.message);
+        const errorData = (err as OTPError).data;
+        setError(errorData?.message || "Verification failed");
 
         // Show resend button only if OTP expired
-        if (errorData.code === "OTP_EXPIRED") {
+        if (errorData?.code === "OTP_EXPIRED") {
           setShowResend(true);
         }
       } else {
@@ -123,7 +124,7 @@ const VerificationPage = () => {
       setResendMessage(result.message); // e.g. "OTP resent successfully"
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
-        const message = (err as any).data?.message || "Failed to resend OTP";
+        const message = (err as APIError).data?.message || "Failed to resend OTP";
         setError(message);
       } else {
         setError("An unexpected error occurred.");

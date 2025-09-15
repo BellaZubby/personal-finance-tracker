@@ -11,6 +11,7 @@ import { AppDispatch } from "@/app/store";
 import { useSigninUserMutation } from "@/app/utils/authApi";
 import { useState } from "react";
 import AuthGate from "@/app/components/AuthGate";
+import { APIError } from "@/app/shared/types";
 
 const Signin = () => {
   const router = useRouter();
@@ -36,7 +37,7 @@ const Signin = () => {
       router.push("/dashboard");
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
-        const message = (err as any).data?.message || "Login failed";
+        const message = (err as APIError).data?.message || "Login failed";
         setErrorMessage(message);
       } else {
         setErrorMessage("An unexpected error occurred.");

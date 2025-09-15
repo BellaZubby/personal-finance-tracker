@@ -30,7 +30,7 @@ const MobileNav = ({
 
   useEffect(() => {
     setIsAvatarToggled(false);
-  }, [pathname]);
+  }, [pathname, setIsAvatarToggled]);
 
   return (
     <div className="flex items-center justify-between lg:hidden">

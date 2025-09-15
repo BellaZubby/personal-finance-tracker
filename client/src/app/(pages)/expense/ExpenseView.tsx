@@ -10,6 +10,7 @@ import { Spinner } from "@/app/components/Spinner";
 import Link from "next/link";
 import SaveExpenseModal from "@/app/components/SaveExpenseModal";
 import { useRouter } from "next/navigation";
+import { APIError } from "@/app/shared/types";
 
 const ExpenseSetup = () => {
   // Local form state
@@ -98,7 +99,7 @@ const ExpenseSetup = () => {
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
         const message =
-          (err as any).data?.message ||
+          (err as APIError).data?.message ||
           "Failed to save budget. Please try again";
         setErrorMessage(message);
       } else {
@@ -132,7 +133,7 @@ const ExpenseSetup = () => {
         clearTimeout(redirectTimer);
       };
     }
-  }, [successMessage]);
+  }, [successMessage, refetch, router]);
 
   // Loading state
   if (loadingBudget || loadingCount) {

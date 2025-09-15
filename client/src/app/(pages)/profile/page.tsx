@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "@/app/store/authSlice";
 import { RootState } from "@/app/store";
 import ProtectedRoute from "@/app/components/protectedRoute";
+import { APIError } from "@/app/shared/types";
 
 const Profile = () => {
   // extract user and rehydration status from redux
@@ -65,7 +66,7 @@ const Profile = () => {
       setEditing(false);
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
-        const message = (err as any).data?.message || "Update failed";
+        const message = (err as APIError).data?.message || "Update failed";
         setErrorMessage(message);
       } else {
         setErrorMessage("An unexpected error occurred.");
@@ -83,7 +84,7 @@ const Profile = () => {
 
       return () => clearTimeout(timer); // Cleanup on unmount or message change
     }
-  }, [successMessage]);
+  }, [successMessage, errorMessage]);
 
   const handleDelete = async () => {
     try {
@@ -100,7 +101,7 @@ const Profile = () => {
       }, 2500);
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
-        const message = (err as any).data?.message || "Delete failed";
+        const message = (err as APIError).data?.message || "Delete failed";
         setErrorMessage(message);
       } else {
         setErrorMessage("An unexpected error occurred.");

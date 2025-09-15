@@ -58,7 +58,7 @@ const DashboardSetup = () => {
       refetchHistory();
       refetchInsights();
     }
-  }, [shouldRefresh]);
+  }, [shouldRefresh, refetchSummary, refetchHistory, refetchInsights]);
 
   const [greeting, setGreeting] = useState("");
   const [expandedDate, setExpandedDate] = useState<string | null>(null);

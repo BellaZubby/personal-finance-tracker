@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import AuthGate from '@/app/components/AuthGate';
+import { APIError } from '@/app/shared/types';
 
 
 
@@ -39,7 +40,7 @@ const ResetPassword = () => {
         } catch (err:unknown) {
           const message =
           typeof err === "object" && err !== null && "data" in err
-            ? (err as any).data?.message || "Invalid or expired reset link"
+            ? (err as APIError).data?.message || "Invalid or expired reset link"
             : "An unexpected error occurred.";
         setError(message);
         }
@@ -47,7 +48,7 @@ const ResetPassword = () => {
 
         resolveCode();
         
-    }, [code]);
+    }, [code, resolveResetCode, router]);
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +85,7 @@ const ResetPassword = () => {
         } catch(err:unknown) {
             if (typeof err === "object" && err !== null && "data" in err) {
           const message =
-            (err as any).data?.message || "Password Reset Failed";
+            (err as APIError).data?.message || "Password Reset Failed";
           setError(message);
         } else {
           setError("An unexpected error occurred.");

@@ -112,7 +112,7 @@ export const budgetApi = createApi({
       {
         message: string;
         data: {
-          status: String;
+          status: string;
           totalAllocated: number;
           totalSpent: number;
           remaining: number;
