@@ -40,7 +40,7 @@ const ForgotPassword = () => {
     if (validateEmailInput()) {
       try {
         const result = await forgotPassword({ email }).unwrap();
-        console.log(result);
+        // console.log(result);
         setSuccessMessage(result.message);
       } catch (err: unknown) {
         if (typeof err === "object" && err !== null && "data" in err) {
@@ -60,7 +60,7 @@ const ForgotPassword = () => {
           <div className="flex flex-col items-center justify-center mb-10">
             <Link className="flex items-center justify-center" href="/">
               <Image
-                src={"/akulyst-logo.png"}
+                src={"https://res.cloudinary.com/dxveggtpi/image/upload/q_auto,f_auto/LogoMakr-2ziVYh_co1n4b.ico"}
                 alt="Akulyst-logo"
                 width={80}
                 height={80}

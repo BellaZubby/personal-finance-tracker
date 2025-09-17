@@ -140,13 +140,13 @@ const DashboardSetup = () => {
   // No budget fallback
   if (error || !data?.data) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-        <p className="text-gray-600 mb-6 text-lg">
+      <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
+        <p className="text-gray-600 mb-6 text-lg text-center">
           You don&apos;t have any budget data to view.
         </p>
-        <Link href={"/budget"} className="text-sunPurple underline font-medium text-lg">
+          <Link href={"/budget"} className="text-sunPurple underline font-medium text-lg text-center">
           Set up a budget to unlock your dashboard insights.
-        </Link>
+          </Link>
       </main>
     );
   }

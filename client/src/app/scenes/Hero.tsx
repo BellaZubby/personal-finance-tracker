@@ -24,7 +24,7 @@ const Hero = () => {
   return (
     <motion.section
       id="hero"
-      className="relative min-h-screen px-6 text-center bg-cover bg-center z-0 bg-fixed bg-[url('/graph-bg.jpg')] font-inter"
+      className="relative min-h-screen px-6 text-center bg-cover bg-center z-0 bg-fixed bg-[url('https://res.cloudinary.com/dxveggtpi/image/upload/q_auto,f_auto,c_fill,w_1600,h_900/akulyst_hero_gi1pda.jpg')] font-inter"
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent z-10 flex flex-col justify-center items-center">

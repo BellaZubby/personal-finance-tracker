@@ -106,8 +106,8 @@ export const verifyOTP = async (req: Request, res: Response) => {
     // store token in http-only cookie
     res.cookie("authToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: process.env.NODE_ENV === "production", // Only set Secure: true when the app is in production.
+      sameSite: "none", // allows for cross-site requests, like when two different browser are communicating (Vercel and Render).
       maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
@@ -186,9 +186,8 @@ export const loginUser = async (req: Request, res: Response) => {
     // store also as cookies
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      // sameSite: "strict",
-      sameSite: "none",
+      secure: process.env.NODE_ENV === "production", // Only set Secure: true when the app is in production.
+      sameSite: "none", // allows for cross-site requests, like when two different browser are communicating (Vercel and Render)
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -266,8 +265,6 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     const { rawToken, hashedToken, code } = generateResetToken();
 
-    console.log("Generated reset token:", hashedToken);
-
     const expires = new Date(Date.now() + 15 * 60 * 1000); // 15 mins
 
     user.rawToken = rawToken; // stores raw token temporarily
@@ -277,7 +274,6 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     await user.save();
 
-    // await sendPasswordResetEmail(email, rawToken);
     await sendPasswordResetEmail(email, code);
 
     res
@@ -494,9 +490,11 @@ export const deleteUser = async (req: AuthenticatedRequest, res: Response) => {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     // Cascade delete: remove all budgets and expenses linked to the user
-    await Budget.deleteMany({ userId });
-    await Expense.deleteMany({ userId });
 
+    if (user) {
+      await Budget.deleteMany({ userId });
+      await Expense.deleteMany({ userId });
+    }
     // Respond with confirmation
     res.status(200).json({ message: "Account deleted successfully" });
   } catch (error) {

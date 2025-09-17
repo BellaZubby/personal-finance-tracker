@@ -52,11 +52,11 @@ const Signup = () => {
 
       // navigate to verification page after short delay
 
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         router.push("/verification");
-      }, 3000);
+      }, 1500);
 
-      return () => clearTimeout(timer);
+      // return () => clearTimeout(timer);
     } catch (err: unknown) {
       if (isErrorWithMessage(err)) {
         setErrorMessage(err.message);
@@ -71,7 +71,7 @@ const Signup = () => {
           <div className="flex flex-col items-center justify-center mb-10">
             <Link className="flex items-center justify-center" href="/">
               <Image
-                src={"/akulyst-logo.png"}
+                src={"https://res.cloudinary.com/dxveggtpi/image/upload/q_auto,f_auto/LogoMakr-2ziVYh_co1n4b.ico"}
                 alt="Akulyst-logo"
                 width={80}
                 height={80}

@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Logo */}
         <Link className="flex items-center" href="/">
           <Image
-            src={"/akulyst-logo.png"}
+            src={"https://res.cloudinary.com/dxveggtpi/image/upload/q_auto,f_auto/LogoMakr-2ziVYh_co1n4b.ico"}
             alt="Akulyst-logo"
             width={80}
             height={80}

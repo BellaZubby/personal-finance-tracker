@@ -39,6 +39,13 @@ const Signin = () => {
       if (typeof err === "object" && err !== null && "data" in err) {
         const message = (err as APIError).data?.message || "Login failed";
         setErrorMessage(message);
+
+        // Redirect if user is unverified
+        if (message.includes("User not verified")) {
+          setTimeout(() => { // creates a little delay before the redirect
+            router.push("/verification"); 
+          }, 1500)
+        }
       } else {
         setErrorMessage("An unexpected error occurred.");
       }
@@ -52,7 +59,9 @@ const Signin = () => {
           <div className="flex flex-col items-center justify-center mb-10">
             <Link className="flex items-center justify-center" href="/">
               <Image
-                src={"/akulyst-logo.png"}
+                src={
+                  "https://res.cloudinary.com/dxveggtpi/image/upload/q_auto,f_auto/LogoMakr-2ziVYh_co1n4b.ico"
+                }
                 alt="Akulyst-logo"
                 width={80}
                 height={80}

@@ -58,6 +58,7 @@ const Profile = () => {
     try {
       const result = await updateUser({ firstName, lastName }).unwrap();
 
+      // ensures the updated name is reflected in the localstorge and rendered on the UI on reload
       localStorage.setItem("user", JSON.stringify(result.user));
 
       // ✅ Update Redux store if needed
@@ -114,8 +115,8 @@ const Profile = () => {
     <ProtectedRoute>
       <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4 font-inter">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-          <div className="flex items-center space-x-4 mb-6">
-            <div className="bg-sunPurple text-white rounded-full w-16 h-16 flex items-center justify-center text-xl font-bold">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="bg-sunPurple text-white rounded-full sm:w-16 sm:h-16 w-20 h-20 flex items-center justify-center text-xl font-bold">
               {initials}
             </div>
             <div>

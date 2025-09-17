@@ -43,7 +43,7 @@ const Navbar = () => {
           if (entry.isIntersecting) {
             const currentSection = entry.target.id;
             setActiveSection(currentSection);
-            console.log(currentSection);
+            // console.log(currentSection);
           }
         });
       },

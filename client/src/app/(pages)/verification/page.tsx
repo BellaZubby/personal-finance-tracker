@@ -47,7 +47,7 @@ const VerificationPage = () => {
     if (reduxEmail) {
       setEmail(reduxEmail);
     } else {
-      const storedUser = localStorage.getItem("user");
+      const storedUser = localStorage.getItem("pendingUser");
       if (storedUser) {
         const parsed = JSON.parse(storedUser);
         setEmail(parsed.email);
@@ -90,7 +90,7 @@ const VerificationPage = () => {
 
       setTimeout(() => {
         router.push("/dashboard");
-      }, 2000);
+      }, 1500);
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "data" in err) {
         // Show resend button only if OTP expired
@@ -139,7 +139,7 @@ const VerificationPage = () => {
           <div className="flex flex-col items-center justify-center mb-10">
             <Link className="flex items-center justify-center" href="/">
               <Image
-                src={"/akulyst-logo.png"}
+                src={"https://res.cloudinary.com/dxveggtpi/image/upload/q_auto,f_auto/LogoMakr-2ziVYh_co1n4b.ico"}
                 alt="Akulyst-logo"
                 width={80}
                 height={80}

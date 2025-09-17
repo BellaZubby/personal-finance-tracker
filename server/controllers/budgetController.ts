@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { AuthenticatedRequest } from "../middleware/authMiddleware";
 import Budget from "../models/budget";
+import Expense from "../models/expense";
 
 // create a new budget for the authenticated user
 export const createBudget = async (
@@ -54,7 +55,17 @@ export const deleteBudget = async (
 ) => {
   try {
     const userId = req.user?.id;
-    await Budget.deleteOne({ userId });
+
+    // delete the user's budget
+    const deletedBudget = await Budget.deleteOne({ userId });
+
+    // To delete expenses tied to the reset budget
+
+    if (deletedBudget) {
+      await Expense.deleteMany({userId});
+    }
+
+    // delete all expenses associated with the user
     res.status(200).json({ message: "Budget reset successful," });
   } catch (error) {
     if (error instanceof Error) {
