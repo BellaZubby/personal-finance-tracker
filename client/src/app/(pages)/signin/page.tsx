@@ -30,7 +30,7 @@ const Signin = () => {
       dispatch(
         login({
           user: result.user,
-          token: result.token,
+          // token: result.token,
         })
       );
 

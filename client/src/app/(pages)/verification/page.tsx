@@ -22,7 +22,7 @@ interface verificationResponse {
     lastName: string;
     email: string;
   };
-  token: string;
+  // token: string;
 }
 
 const VerificationPage = () => {
@@ -82,7 +82,7 @@ const VerificationPage = () => {
       dispatch(
         login({
           user: result.user,
-          token: result.token,
+          // token: result.token,
         })
       );
 

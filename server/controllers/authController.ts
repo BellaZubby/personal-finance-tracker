@@ -57,14 +57,15 @@ export const registerUser = async (req: Request, res: Response) => {
     // res.status(201).json({message: "Registration successful. OTP sent to email for verification.", data: newUser});
   } catch (error) {
     // res.status(500).json({message: "Registration failed", error: error.message});
-    if (error instanceof Error) {
+    if (error instanceof Error) { // in async code or third-party libraries, the error might be a **string**, `null`, or something unexpected
+      // "instanceof Error" ensures you're dealing with a proper error that has a `.message` property
       res
         .status(500)
         .json({ message: "Registration failed", error: error.message });
     } else {
       res
         .status(500)
-        .json({ message: "Registration failed", error: String(error) });
+        .json({ message: "Registration failed", error: String(error)});
     }
   }
 };
@@ -132,7 +133,6 @@ export const verifyOTP = async (req: Request, res: Response) => {
         lastName: user.lastName,
         email: user.email,
       },
-      // token
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -176,7 +176,6 @@ export const loginUser = async (req: Request, res: Response) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
-      // sameSite: "strict",
       maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
@@ -201,7 +200,6 @@ export const loginUser = async (req: Request, res: Response) => {
         lastName: user.lastName,
         email: user.email,
       },
-      // token
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -394,7 +392,6 @@ export const refreshToken = (req: Request, res: Response) => {
     res.cookie("authToken", newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      // sameSite: "strict",
       sameSite: "none",
       maxAge: 15 * 60 * 1000,
     });

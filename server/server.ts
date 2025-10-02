@@ -8,6 +8,7 @@ import historyRoutes from "./routes/historyRoutes";
 import dashboardRoutes from "./routes/dashboardRoute";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+
 // created an instance of the express app.
 const app = express();
 
@@ -19,13 +20,21 @@ const allowedOrigins = [
 
 const startServer = async () => {
   await connectDB(); // connecting to my database
-
+  
+  // CORS: Cross-Origin Resource Sharing - Allows frontend to make calls to the backend, especially when on different origins
   app.use(
-    cors({
-      origin: allowedOrigins, // or your deployed frontend URL
-      credentials: true, // if you're using cookies or auth headers
-    })
-  );
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"), false);
+      }
+    },
+    credentials: true,
+  })
+);
+
 
   app.use(cookieParser());
 

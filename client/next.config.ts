@@ -3,8 +3,18 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   // for cloudinary
+  // images: {
+  //   domains: ["res.cloudinary.com"],
+  // },
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/dxveggtpi/image/upload/**",
+      },
+    ]
+   // domains: ["m.media-amazon.com"], // this allows OMDB image host
   },
 };
 

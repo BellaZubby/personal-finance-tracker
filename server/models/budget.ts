@@ -1,5 +1,5 @@
 // creating the budget model
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose"; // "Document" helps TypeScript understand that this schema represents a MongoDB document
 
 // define the structure for each category in the budget
 export interface Category {

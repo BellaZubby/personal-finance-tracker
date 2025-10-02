@@ -115,8 +115,8 @@ const Profile = () => {
     <ProtectedRoute>
       <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4 font-inter">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="bg-sunPurple text-white rounded-full sm:w-16 sm:h-16 w-20 h-20 flex items-center justify-center text-xl font-bold">
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
+            <div className="bg-sunPurple text-white rounded-full p-3 flex items-center justify-center text-xl font-bold">
               {initials}
             </div>
             <div>

@@ -16,7 +16,6 @@ interface User {
 interface AuthState {
   user: User | null; // holds logged-in user's info or null if logged out
   isAuthenticated: boolean; // tracks login status
-  token: string | null; // Add this
   pendingUser: User | null;
   rehydrated: boolean;
 }
@@ -25,7 +24,6 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
-  token: null,
   pendingUser: null,
   rehydrated: false,
 };
@@ -46,15 +44,13 @@ const authSlice = createSlice({
       localStorage.setItem("pendingUser", JSON.stringify(action.payload));
     },
 
-    login: (state, action: PayloadAction<{ user: User; token: string }>) => {
+    login: (state, action: PayloadAction<{ user: User}>) => {
       // sets the user and flips the auth flag to true
       state.user = action.payload.user;
-      state.token = action.payload.token;
       state.isAuthenticated = true;
       state.pendingUser = null;
 
       // Persist token to localStorage
-      // localStorage.setItem("authToken", action.payload.token);
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.removeItem("pendingUser");
       state.rehydrated = true;
@@ -63,22 +59,18 @@ const authSlice = createSlice({
     logout: (state) => {
       // clears the user and resets the flag to false
       state.user = null;
-      // state.token = null;
       state.isAuthenticated = false;
       state.pendingUser = null;
       state.rehydrated = false;
 
-      // localStorage.removeItem("authToken");
       localStorage.removeItem("user");
       localStorage.removeItem("pendingUser");
     },
 
     rehydrateAuth: (state) => {
-      // const token = localStorage.getItem("authToken");
       const user = localStorage.getItem("user");
 
       if (user) {
-        // state.token = token;
         state.user = JSON.parse(user);
         state.isAuthenticated = true;
       }
