@@ -170,6 +170,8 @@ const BudgetSetup = () => {
 
       {exists ? (
         <>
+        
+        {/* displays this only when budget is expired */}
           {exists && isExpired && (
             <>
               <p className="text-red-500 font-semibold text-center mb-4">
@@ -177,6 +179,18 @@ const BudgetSetup = () => {
               </p>
             </>
           )}
+
+          {/* displays this only when we have a set budget and it is NOT expired */}
+          {exists && !isExpired && (
+            <div className="text-center mb-6">
+              <h1 className="text-sunPurple font-semibold sm:text-xl text-lg mb-3">
+                Budget set—smart moves ahead. You&apos;ve got this{" "}
+                {user?.firstName} ☺️
+              </h1>
+            </div>
+          )}
+
+          {/* The actual budget summary */}
           {budget && (
             <BudgetSummary
               budget={budget}

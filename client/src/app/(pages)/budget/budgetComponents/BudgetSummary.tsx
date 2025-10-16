@@ -22,17 +22,10 @@ const BudgetSummary = ({ budget, onRequestDelete }: Props) => {
   ); // formatting the end date, obtained by adding duration to start date.
   return (
     <div>
-      <div className="text-center mb-6">
-        <h1 className="text-sunPurple font-semibold sm:text-xl text-lg mb-3">
-          Budget set—smart moves ahead. You&apos;ve got this {user?.firstName}{" "}
-          ☺️
-        </h1>
-      </div>
       <div className="bg-white shadow-md rounded-lg p-6 mt-8">
         <h2 className="text-xl font-semibold text-sunPurple mb-4">
           Your Budget Summary
         </h2>
-
         <div className="text-sm text-gray-700 mb-4">
           <p>
             <strong>Start Date:</strong> {formattedStart}
