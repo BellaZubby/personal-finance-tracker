@@ -114,10 +114,10 @@ const BudgetSetup = () => {
       if (typeof err === "object" && err !== null && "data" in err) {
         const message =
           (err as APIError).data?.message ||
-          "Failed to save budget. Please try again";
+          "Failed to delete budget. Please try again";
         dispatch(setError(message));
       } else {
-        dispatch(setError("Failed to save budget.Please try again"));
+        dispatch(setError("Failed to delete budget.Please try again"));
       }
     }
   };
@@ -168,12 +168,14 @@ const BudgetSetup = () => {
         </p>
       )}
 
-      {exists && !isExpired ? (
+      {exists ? (
         <>
           {exists && isExpired && (
-            <p className="text-red-500 font-semibold text-center mb-4">
-              Your budget has expired.
-            </p>
+            <>
+              <p className="text-red-500 font-semibold text-center mb-4">
+                Your budget has expired.
+              </p>
+            </>
           )}
           {budget && (
             <BudgetSummary
